@@ -47,7 +47,7 @@ module.exports = ( _, argv ) => {
         devServer: {
             contentBase: path.join( __dirname, "assets" ),
             compress: true,
-            port: 3011
+            port: process.env.PORT || 3000
         },
         plugins: [
             // Clear the build directory
@@ -62,7 +62,6 @@ module.exports = ( _, argv ) => {
                         transform: ( content, path ) => {
                         // insert app version to templates
                             if( path.includes( ".html" ) ) {
-                                console.log( path, content );
                                 return Buffer.from( content.toString().split( "{{version}}" ).join( APP_VERSION ) );
                             }
 
